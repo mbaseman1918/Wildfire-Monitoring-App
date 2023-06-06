@@ -5,23 +5,33 @@ import { loadModules } from 'esri-loader';
 export const useCreateMap = (mapRef) => {
   console.log(process.env.NODE_ENV)
   useEffect(() => {
-    let view;
-    let graphicsLayer;
-
     const initializeMap = async (mapRef) => {
-      const modules = ["esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer", "esri/config"];
-      const [Map, MapView, Graphic, GraphicsLayer, esriConfig] = await loadModules(modules);
+      const modules = ["esri/WebMap", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer", "esri/config", "esri/widgets/ScaleBar", "esri/widgets/Legend"];
+      const [WebMap, MapView, Graphic, GraphicsLayer, esriConfig, ScaleBar, Legend] = await loadModules(modules);
       esriConfig.apiKey = process.env.REACT_APP_API
-      const map = new Map({ basemap: "arcgis-topographic" })
-      view = new MapView({
-        map: map,
-        zoom: 7,
+      const webmap = new WebMap({
+        portalItem: {
+          id: "a8fbe43c4c034bde9f2d8a1165b8b681"
+        }
+      });
+      const view = new MapView({
+        map: webmap,
         container: mapRef.current,
-        center: [-120, 45],
       });
 
-      graphicsLayer = new GraphicsLayer();
-      map.add(graphicsLayer);
+      const scalebar = new ScaleBar({
+        view: view
+      });
+
+      view.ui.add(scalebar, "bottom-left");
+
+      const legend = new Legend ({
+        view: view
+      });
+      view.ui.add(legend, "top-right")
+
+      const graphicsLayer = new GraphicsLayer();
+      webmap.add(graphicsLayer);
 
       const point = {
         type: "point",
