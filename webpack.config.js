@@ -49,6 +49,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": {
         REACT_APP_API: JSON.stringify(process.env.REACT_APP_API),
+        REACT_APP_GOOGLE_API: JSON.stringify(process.env.REACT_APP_GOOGLE_API),
       },
     }),
   ],

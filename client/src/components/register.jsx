@@ -21,6 +21,17 @@ const Register = () => {
     })
   }
 
+  const handleSubmitButtonClick = (e, formData) => {
+    e.preventDefault();
+    axios.post('/rsvps', formData)
+    .then((result) => {
+      console.log('RSVP posted to DB', result)
+    })
+    .catch((err) => {
+      console.log('Uh Oh ', err)
+    })
+  }
+
   return(
     <div>
     <form onSubmit={(e) => handleSubmitButtonClick(e, formData)}>
@@ -45,3 +56,5 @@ const Register = () => {
   </div>
   )
 }
+
+export default Register;

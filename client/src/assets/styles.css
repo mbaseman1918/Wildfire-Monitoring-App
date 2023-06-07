@@ -1,3 +1,9 @@
 .map-view {
   height: 80vh;
 }
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

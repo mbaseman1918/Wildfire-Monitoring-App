@@ -6,8 +6,8 @@ export const useCreateMap = (mapRef) => {
   console.log(process.env.NODE_ENV)
   useEffect(() => {
     const initializeMap = async (mapRef) => {
-      const modules = ["esri/WebMap", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer", "esri/config", "esri/widgets/ScaleBar", "esri/widgets/Legend"];
-      const [WebMap, MapView, Graphic, GraphicsLayer, esriConfig, ScaleBar, Legend] = await loadModules(modules);
+      const modules = ["esri/WebMap", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer", "esri/config", "esri/widgets/ScaleBar", "esri/widgets/Legend", "esri/widgets/Search"];
+      const [WebMap, MapView, Graphic, GraphicsLayer, esriConfig, ScaleBar, Legend, Search] = await loadModules(modules);
       esriConfig.apiKey = process.env.REACT_APP_API
       const webmap = new WebMap({
         portalItem: {
@@ -29,6 +29,11 @@ export const useCreateMap = (mapRef) => {
         view: view
       });
       view.ui.add(legend, "top-right")
+
+      const search = new Search ({
+        view: view
+      });
+      view.ui.add (search, "top-right")
 
       const graphicsLayer = new GraphicsLayer();
       webmap.add(graphicsLayer);
@@ -56,6 +61,6 @@ export const useCreateMap = (mapRef) => {
 
     initializeMap(mapRef);
 
-    return () => view?.destroy();
+    // return () => view?.destroy();
   }, [mapRef])
 };

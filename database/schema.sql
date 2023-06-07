@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   firstName TEXT,
   lastName TEXT,
-  email TEXT,
+  email TEXT UNIQUE,
   passwrd TEXT,
   addressLine1 TEXT,
   addressLine2 TEXT,
