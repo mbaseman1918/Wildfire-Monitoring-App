@@ -10,5 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
   addressLine2 TEXT,
   city TEXT,
   state TEXT,
-  zipcode TEXT
+  zipcode INT,
+  lat TEXT,
+  lng TEXT
 )

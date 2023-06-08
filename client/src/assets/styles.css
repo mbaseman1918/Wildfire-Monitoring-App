@@ -7,3 +7,43 @@ nav {
   flex-direction: row;
   justify-content: space-around;
 }
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  align-self: center;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 1em;
+}
+
+/* #root {
+  margin:0;
+  display: grid;
+  background-image: url("./wildfire.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color:white;
+  background-position: center;
+  min-height: 95vh;
+}
+*/
+label {
+  font-weight: 900;
+}

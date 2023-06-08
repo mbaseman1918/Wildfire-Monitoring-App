@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import Map from './map.jsx'
 import Register from './register.jsx'
+import Login from './login.jsx'
 
 const App =() => {
   const [view, setView] = useState("default")
-  const [address, setAddress] = useState(null)
+  const [latLng, setLatLng] = useState(null)
 
   const renderView = () => {
     switch (view) {
       case "default":
         return (
           <div>
-            <Map />
+            <Map latLng={latLng}/>
           </div>
         );
       case "register":
         return (
-          <div>
-            <Register />
+          <div className="register">
+            <Register setLatLng={setLatLng} setView={setView}/>
           </div>
         );
       case "login":
         return (
-          <div>
-
+          <div className="login">
+            <Login setLatLng={setLatLng} setView={setView}/>
           </div>
         );
       default:
         return (
           <div>
-            <Map />
+            <Map latLng={latLng}/>
           </div>
         )
     }
@@ -38,10 +39,11 @@ const App =() => {
   return (
     <div className="App">
       <header>
+        <h1>WILDFIRE MONITOR</h1>
         <nav>
-          <h1 onClick={(e) => setView("default")}>Home</h1>
-          <h1 onClick={(e) => setView("register")}>Register</h1>
-          <h1 onClick={(e) => setView("login")}>Login</h1>
+          <h2 onClick={(e) => setView("default")}>Home</h2>
+          <h2 onClick={(e) => setView("register")}>Register</h2>
+          <h2 onClick={(e) => setView("login")}>Login</h2>
         </nav>
       </header>
       {renderView()}

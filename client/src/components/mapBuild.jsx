@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { loadModules } from 'esri-loader';
 // import esriConfig from '@arcgis/core/config.js'
 
-export const useCreateMap = (mapRef) => {
+export const useCreateMap = (mapRef, latLng) => {
   console.log(process.env.NODE_ENV)
   useEffect(() => {
     const initializeMap = async (mapRef) => {
@@ -38,25 +38,28 @@ export const useCreateMap = (mapRef) => {
       const graphicsLayer = new GraphicsLayer();
       webmap.add(graphicsLayer);
 
-      const point = {
+      if(latLng !== null){
+        const point = {
         type: "point",
-        longitude: -120,
-        latitude: 45
-      };
-      const simpleMarkerSymbol = {
-        type: "simple-marker",
-        color: [226, 119, 40],
-        outline: {
-          color: [255, 255, 255],
-          width: 1
-        }
+        longitude: latLng[1],
+        latitude: latLng[0]
+        };
+        const simpleMarkerSymbol = {
+          type: "simple-marker",
+          color: [0, 0, 0],
+          outline: {
+            color: [255, 255, 255],
+            width: 1
+          }
+        };
+
+        const pointGraphic = new Graphic({
+          geometry: point,
+          symbol: simpleMarkerSymbol
+        });
+        graphicsLayer.add(pointGraphic)
       };
 
-      const pointGraphic = new Graphic({
-        geometry: point,
-        symbol: simpleMarkerSymbol
-      });
-      graphicsLayer.add(pointGraphic)
     };
 
     initializeMap(mapRef);
